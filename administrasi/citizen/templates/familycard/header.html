@@ -11,10 +11,10 @@
         <th>Kelurahan</th>
         <th>Kecamatan</th>
         <th>Provinsi</th>
-        <th>Kode Pos</th>
         <th>Image</th>
         <th>Dibuat tanggal</th>
         <th>Direvisi tanggal</th>
+        <th>aksi</th>
     </thead>
     {% for x in data %}
     <tbody>
@@ -25,10 +25,14 @@
         <td>{{ x.subdistrict}} </td>
         <td>{{ x.district}} </td>
         <td>{{ x.province}} </td>
-        <td>{{ x.postalcode}} </td>
         <td>{{ x.image}} </td>
         <td>{{ x.created_at}} </td>
         <td>{{ x.updated_at}} </td>
+        <td style="width: 100px;">
+            <button><a href="{{x.id}}/change" style="text-decoration: none;">Edit</a></button>
+            <button>Detail</button>
+            <button>Delete</button>
+        </td>
     </tbody>
     {%  endfor  %}
 </table>

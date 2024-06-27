@@ -10,6 +10,6 @@ urlpatterns = [
   
     path("familycard/", views.familycardindex, name='indexfamilycard'),
     path("createfamilycard/", views.familycardcreate, name='createfamilycard'),
-    path("detailfamilycard/", views.familycardview, name='viewfamilycard'),
+    path("familycard/<int:id>/change/", views.familycardview, name='viewfamilycard'),
     path("deletefamilycard/", views.familycarddelete, name='deletefamilycard'),
 ]

@@ -29,8 +29,14 @@ def familycardindex(request):
 def familycardcreate(request):
     return HttpResponse("Hello Create familycard")
 #view datas
-def familycardview(request):
-    return HttpResponse("Hello View Detail familycard")
+def familycardview(request, id):
+    template = "familycard/detail.html"
+    context = {}
+    try:
+        data = FamilyCard.objects.get(id=id) 
+    except:
+        raise Http404("Data Not Found")
+    return render(request, template, {"data" : data})
 #delete
 def familycarddelete(request):
     return HttpResponse("Hello Delete Data familycard")

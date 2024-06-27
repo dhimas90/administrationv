@@ -18,7 +18,8 @@ class FamilyCard(models.Model):
        
     def __str__(self):
         return str(self.card_number)
-       
+
+
 #citizen
 class Citizen(models.Model):
     GENDER = {
