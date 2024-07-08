@@ -1,7 +1,15 @@
 <h1>Hello World</h1>
 <button>
-    add record    
+    <a href="{% url 'createfamilycard' %}">
+        add record    
+    </a>
+
 </button>
+{% if messages %}
+{% for message in messages %}
+{{ message }}
+{% endfor %}
+{% endif %}
 <table>
     <thead>
         <th>Card Number</th>
@@ -25,14 +33,24 @@
         <td>{{ x.subdistrict}} </td>
         <td>{{ x.district}} </td>
         <td>{{ x.province}} </td>
-        <td>{{ x.image}} </td>
+        <td><img src="{{ x.image.url }}" alt="" style="width: 100px; height: 100px;"></td>
         <td>{{ x.created_at}} </td>
         <td>{{ x.updated_at}} </td>
         <td style="width: 100px;">
-            <button><a href="{{x.id}}/change" style="text-decoration: none;">Edit</a></button>
-            <button>Detail</button>
-            <button>Delete</button>
+            <button><a href="{% url 'detailsfamilycard' x.id %}" style="text-decoration: none;">Detail</a></button>
+            <button><a href="{% url 'updatefamilycard' x.id %}" style="text-decoration: none;">Update</a></button>
+            <!-- <button><a href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a></button> -->
+            
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="submit" value="delete">
+                 <!-- <button type="submit"><a onclick="return confirm('Are you sure to delete {{ x.card_number }}?');" href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a></button> --> -->
+            </form>
+            
+            <!-- <a onclick="return confirm('Are you sure to delete data?');" href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a> -->
+            
         </td>
     </tbody>
-    {%  endfor  %}
+    {% endfor %}
 </table>

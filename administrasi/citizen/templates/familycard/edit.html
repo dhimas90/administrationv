@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello Edit</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% comment %} {{form.as_p}}    {% endcomment %}
+        <label for="id">Id</label>
+        <input type="text" name="id" id="id" value="{{ data.card_number }}"><br> 
+        <label for="card_number">Card Number</label>
+        <input type="text" name="card_number" id="card_number" value="{{ data.card_number }}"><br>
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address" value="{{ data.address }}"><br>
+        <label for="neighbourhood_t">RT</label>
+        <input type="text" name="neighbourhood_t" id="neighbourhood_t" value="{{ data.neighbourhood_t }}"><br>
+        <label for="neighbourhood_w">RW</label>
+        <input type="text" name="neighbourhood_w" id="neighbourhood_w" value="{{ data.neighbourhood_w }}"><br>
+        <label for="subdistrict">Kelurahan</label>
+        <input type="text" name="subdistrict" id="subdistrict" value="{{ data.subdistrict }}"><br>
+        <label for="district">Kecamatan</label>
+        <input type="text" name="district" id="district" value="{{ data.district }}"><br>
+        <label for="province">Provinsi</label>
+        <input type="text" name="province" id="province" value="{{ data.province }}"><br>
+        <label for="postalcode">Kode Pos</label>
+        <input type="text" name="postalcode" id="postalcode" value="{{ data.postalcode }}"><br>
+        
+        <img src="{{ data.image.url }}" alt="{{ data.image.url }}" style="height:100px; width:100px">
+        <input type="file" name="image" id="image"><br>
+        <button type="submit" name="edit">Edit</button>
+    </form>
+    
+</body>
+</html>

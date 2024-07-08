@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 # Create your models here.
 
 #family
@@ -12,12 +12,18 @@ class FamilyCard(models.Model):
     district = models.CharField(max_length=50)
     province = models.CharField(max_length=50)
     postalcode = models.CharField(unique=True, max_length=10)
-    image = models.ImageField(max_length=100)
+    image = models.ImageField(max_length=100, upload_to="images/")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
        
     def __str__(self):
         return str(self.card_number)
+    
+    def delete(self, *args, **kwargs):
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
 
 
 #citizen

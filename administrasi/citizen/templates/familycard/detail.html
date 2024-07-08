@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>    
-    <p>{{ data.id }}</p>
+    
     <p>{{ data.card_number }}</p>
     <p>{{ data.address }}</p>
     <p>{{ data.neighbourhood_t }}</p>
@@ -15,8 +15,9 @@
     <p>{{ data.district }}</p>
     <p>{{ data.province }}</p>
     <p>{{ data.postalcode }}</p>
-    <p>{{ data.image }}</p>
+    <p><img src="{{ data.image.url }}" alt="{{ data.image.url }}" style="height:100px; width:100px;"></p>
     <p>{{ data.created_at }}</p>
     <p>{{ data.updated_at }}</p>
+    <a href="{% url 'indexfamilycard' %}"><button name="back">BACK</button></a>
 </body>
 </html>
