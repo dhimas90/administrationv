@@ -1,23 +1,26 @@
 from django.db import models
 import os
-# Create your models here.
 
 #family
-class FamilyCard(models.Model):
-    card_number = models.CharField(max_length=100, unique=True)
-    address = models.CharField(max_length=100)
-    neighbourhood_t = models.CharField(max_length=5)
-    neighbourhood_w = models.CharField(max_length=5)
-    subdistrict = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
-    province = models.CharField(max_length=50)
-    postalcode = models.CharField(unique=True, max_length=10)
-    image = models.ImageField(max_length=100, upload_to="images/")
+class KartuKeluarga(models.Model):
+    seri_terbit = models.CharField(max_length=20, unique=True)
+    no_kk = models.CharField(max_length=20, unique=True)
+    nama_kepala = models.CharField(max_length=100)
+    alamat = models.CharField(max_length=100)
+    rt = models.CharField(max_length=4)
+    rw = models.CharField(max_length=4)
+    kelurahan = models.CharField(max_length=50)
+    kecamatan = models.CharField(max_length=50)
+    kabupaten = models.CharField(max_length=50)
+    kode_pos = models.CharField(max_length=10)
+    provinsi = models.CharField(max_length=50)
+    tanggal_dikeluarkan = models.DateField()
+    ka_dinas = models.CharField(max_length=50, default="PERSONS 1")
+    jumlah_anggota_keluarga = models.IntegerField(null=True, max_length=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-       
     def __str__(self):
-        return str(self.card_number)
+        return str(self.no_kk)
     
     def delete(self, *args, **kwargs):
         if self.image:
@@ -27,45 +30,28 @@ class FamilyCard(models.Model):
 
 
 #citizen
-class Citizen(models.Model):
-    GENDER = {
-        "Laki-laki":"Laki-Laki",
-        "Perempuan":"Perempuan",
-    }
-    GRADUATE = {
-        "SD" : "Sekolah Dasar/Sederajat",
-        "SMP" : "Sekolah Menengah Pertama/Sederajat",
-        "SMA" : "Sekolah Menengah Atas/Sederajat",
-        "Diploma" : "Diploma I/II/III/IV",
-        "Sarjana" : "Sarjana",
-        "Magister" : "Magister",
-        "Doctoral" : "Doctoral",
-    }
-    MARRIAGE = {
-        "K" : "Kawin",
-        "BK" : "Belum Kawin",
-        "J" : "Janda",
-        "D" : "Duda",
-    }
-    STATUS = {
-        "Anak" : "Anak",
-        "Orang Tua" : "Orang Tua",
-    }
-    card_number = models.ForeignKey(FamilyCard, on_delete=models.CASCADE )
-    id_number = models.CharField(unique=True,max_length=100)
-    full_name = models.CharField(max_length=100)
-    gender = models.CharField(max_length=10, choices=GENDER)
-    graduate = models.CharField(max_length=10, choices=GRADUATE)
-    passport = models.CharField(max_length=50, unique=True)
-    permit = models.CharField(max_length=50, unique=True)
-    head_family_name = models.CharField(max_length=100)
-    marriage = models.CharField(max_length=50, choices=MARRIAGE)
-    status_in_family = models.CharField(max_length=10, choices=STATUS)
+class KartuTandaPenduduk(models.Model):
+    no_kk = models.ForeignKey(KartuKeluarga, on_delete=models.CASCADE)
+    nama_lengkap = models.CharField(max_length=100)
+    nik = models.CharField(max_length=50, unique=True, null=False)
+    jenis_kelamin = models.CharField(max_length=10)
+    tempat_lahir = models.CharField(max_length=50)
+    tanggal_lahir = models.DateField()
+    agama = models.CharField(max_length=50)
+    pendidikan = models.CharField(max_length=100)
+    pekerjaan = models.CharField(max_length=50)
+    pernikahan = models.CharField(max_length=50)
+    status_keluarga = models.CharField(max_length=100)
+    kewarganegaraan = models.CharField(max_length=50)
+    passpor = models.CharField(max_length=50, null=True)
+    kitas = models.CharField(max_length=50,null= True)
+    nama_ayah = models.CharField(max_length=50)
+    nama_ibu = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.full_name
+        return self.nama_lengkap
 
 
     

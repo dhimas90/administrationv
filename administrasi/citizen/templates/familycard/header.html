@@ -43,9 +43,7 @@
             
             <form method="POST">
                 {% csrf_token %}
-
-                <input type="submit" value="delete">
-                 <!-- <button type="submit"><a onclick="return confirm('Are you sure to delete {{ x.card_number }}?');" href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a></button> --> -->
+                <button type="submit"><a onclick="return confirm('Are you sure to delete {{ x.card_number }}?');" href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a></button>
             </form>
             
             <!-- <a onclick="return confirm('Are you sure to delete data?');" href="{% url 'deletefamilycard' x.id %}" style="text-decoration: none;">Delete</a> -->
