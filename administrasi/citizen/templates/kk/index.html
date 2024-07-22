@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
+</head>
+<body>
+    <h3>This is </h3>
+
+    <table class="table__wrapper">
+        <thead class="table__thead">
+            <tr>
+                <td>No KK</td>
+                <td>Nama Kepala Keluarga</td>
+                <td>Alamat</td>
+                <td>RT/RW</td>
+                <td>Keluarahan/Kecamatan/Kabupaten</td>
+                <td>Jumlah Anggota Keluarga</td>
+                <td>Opsi</td>
+            </tr>
+        </thead>
+        <tbody class="table__tbody">
+            {% for i in data %}
+            <tr>
+                <td></td>
+                <td>{{ i.no_kk}}</td>
+                <td>{{i.alamat}}</td>
+                <td>{{i.rt}}/{{i.rw}}</td>
+                <td>{{i.kelurahan}}, {{i.kecamatan}}, {{i.kabupaten}}</td>
+                <td>{{i.jumlah_anggota_keluarga}}</td>
+                <td>
+                    <a href="{% url "updatekk" %}">Update</a>
+                    <a href="">Detail</a>
+                    <a href="">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

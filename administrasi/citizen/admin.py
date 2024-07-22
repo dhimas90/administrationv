@@ -1,7 +1,7 @@
 from django.contrib import admin
-from citizen.models import Citizen, FamilyCard
+from .models import KartuKeluarga
 
 # Register your models here.
 
-admin.site.register(Citizen)
-admin.site.register(FamilyCard)
+admin.site.register(KartuKeluarga)
+

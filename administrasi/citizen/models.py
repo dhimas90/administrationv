@@ -3,7 +3,7 @@ import os
 
 #family
 class KartuKeluarga(models.Model):
-    seri_terbit = models.CharField(max_length=20, unique=True)
+    seri_terbit = models.CharField(max_length=20)
     no_kk = models.CharField(max_length=20, unique=True)
     nama_kepala = models.CharField(max_length=100)
     alamat = models.CharField(max_length=100)
@@ -15,8 +15,9 @@ class KartuKeluarga(models.Model):
     kode_pos = models.CharField(max_length=10)
     provinsi = models.CharField(max_length=50)
     tanggal_dikeluarkan = models.DateField()
+    poto = models.ImageField(upload_to='media/', null=True)
     ka_dinas = models.CharField(max_length=50, default="PERSONS 1")
-    jumlah_anggota_keluarga = models.IntegerField(null=True, max_length=2)
+    jumlah_anggota_keluarga = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
